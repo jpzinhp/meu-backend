@@ -39,7 +39,7 @@ Para usar dados reais, configure em `.env.local`:
 | --- | --- |
 | `OPENWEBNINJA_API_KEY` | Busca de empresas reais (dados do Google Maps), gratuito e sem cartão — [openwebninja.com](https://openwebninja.com) |
 | `PEXELS_API_KEY` | Fotos de banco de imagens licenciadas — [pexels.com/api](https://www.pexels.com/api/) |
-| `ANTHROPIC_API_KEY` | (Opcional/futuro) geração de textos por IA generativa |
+| `ANTHROPIC_API_KEY` | Geração de textos (tagline, descrição, sobre, serviços) por IA generativa (Claude) — sem ela, usa textos por template |
 | `DATABASE_URL` / `SUPABASE_URL` | Banco de dados de produção |
 
 Nenhuma chave é exposta ao navegador — todas são lidas apenas em API Routes

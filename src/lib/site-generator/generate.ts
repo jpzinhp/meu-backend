@@ -13,7 +13,8 @@ import { newId } from '../id';
 import { getSegmentImages } from '../images';
 import { buildMapsLink } from '../maps';
 import { buildWhatsAppLink, defaultWhatsAppMessage } from '../whatsapp';
-import { SEGMENT_COPY } from './copy-data';
+import { generateAiCopy } from '../ai';
+import { SEGMENT_COPY, type SegmentCopy } from './copy-data';
 import { SEGMENT_SECTIONS, SECTION_LABELS } from './sections-map';
 import { buildTheme } from './theme';
 
@@ -50,16 +51,32 @@ export async function generateSiteForCompany(
   const variantSeed = options.variantSeed ?? 0;
 
   const theme = buildTheme(company.segment, company.name, variantSeed);
-  const copy = SEGMENT_COPY[company.segment];
-  const tagline = copy.taglines[variantSeed % copy.taglines.length];
-  const description = copy.descriptions[variantSeed % copy.descriptions.length];
+  const baseCopy = SEGMENT_COPY[company.segment];
   const whatsappMessage = defaultWhatsAppMessage(company.name);
   const whatsappLink = buildWhatsAppLink(company.whatsapp || company.phone, whatsappMessage);
   const mapsLink = buildMapsLink(company.address);
 
-  const imagePool = await getSegmentImages(company.segment, imageCountForPlan(plan), theme.primaryColor);
+  // Busca as imagens de referência e (quando ANTHROPIC_API_KEY está
+  // configurada) os textos de marketing gerados por IA em paralelo — se a IA
+  // falhar ou não estiver configurada, caímos de volta para os textos por
+  // template do segmento, sem atrasar nem quebrar a geração do site.
+  const [imagePool, aiCopy] = await Promise.all([
+    getSegmentImages(company.segment, imageCountForPlan(plan), theme.primaryColor),
+    generateAiCopy(company),
+  ]);
   let imageCursor = 0;
   const nextImage = (): SiteImage => imagePool[imageCursor++ % imagePool.length];
+
+  const tagline = aiCopy?.tagline ?? baseCopy.taglines[variantSeed % baseCopy.taglines.length];
+  const description = aiCopy?.description ?? baseCopy.descriptions[variantSeed % baseCopy.descriptions.length];
+  const copy: SegmentCopy = aiCopy
+    ? {
+        ...baseCopy,
+        aboutBody: [aiCopy.about],
+        services: aiCopy.services.map((s) => ({ name: s.name, description: s.description })),
+        differentiators: aiCopy.differentiators,
+      }
+    : baseCopy;
 
   const sectionTypes = SEGMENT_SECTIONS[company.segment];
   const sections: SiteSection[] = [];
