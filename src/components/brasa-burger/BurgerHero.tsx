@@ -3,9 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import {
+  BRAND_KICKER,
   BRAND_NAME,
   BRAND_TAGLINE,
+  BRAND_TAGLINE_SHORT,
   BURGERS,
+  HERO_HEADLINE,
   buildWhatsappOrderLink,
 } from '@/lib/brasa-burger/burgers';
 import { BurgerCarousel } from './BurgerCarousel';
@@ -107,7 +110,7 @@ export function BurgerHero() {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(120% 90% at 50% 100%, rgba(0,0,0,0.32), transparent 60%)',
+              'radial-gradient(120% 95% at 50% 100%, rgba(20,8,2,0.46), transparent 66%)',
           }}
         />
         <div
@@ -123,12 +126,13 @@ export function BurgerHero() {
         aria-hidden="true"
       >
         <span
-          className="whitespace-nowrap font-display uppercase text-white"
+          className="whitespace-nowrap font-display uppercase"
           style={{
-            fontSize: 'clamp(100px, 28vw, 400px)',
+            fontSize: 'clamp(100px, 28vw, 380px)',
             lineHeight: 0.9,
             letterSpacing: '-0.04em',
-            opacity: 0.95,
+            color: '#FFF9F0',
+            opacity: 0.16,
           }}
         >
           BURGER
@@ -136,7 +140,7 @@ export function BurgerHero() {
       </div>
 
       {/* z-60: marca no canto superior esquerdo */}
-      <div className="absolute left-4 top-5 z-[60] sm:left-8 sm:top-6">
+      <div className="absolute left-4 top-5 z-[60] animate-rise-in sm:left-8 sm:top-6">
         <span
           className="text-xs font-bold uppercase tracking-[0.18em] text-white/90"
           style={textShadow}
@@ -169,6 +173,29 @@ export function BurgerHero() {
         </a>
       </nav>
 
+      {/* z-60: chamada principal (kicker + headline) — some no mobile para não poluir */}
+      <div
+        className="absolute left-4 top-24 z-[55] hidden max-w-[260px] animate-rise-in sm:block sm:left-8 sm:top-28 md:left-24 md:top-32 md:max-w-xs"
+        style={{ animationDelay: '90ms' }}
+      >
+        <p
+          className="font-script text-2xl leading-none text-burger-gold sm:text-3xl"
+          style={textShadow}
+        >
+          {BRAND_KICKER}
+        </p>
+        <h1
+          className="mt-1 font-display uppercase leading-[0.92] tracking-tight text-white"
+          style={{ fontSize: 'clamp(28px, 4.2vw, 50px)', ...textShadow }}
+        >
+          {HERO_HEADLINE.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </h1>
+      </div>
+
       {/* z-3 a z-20: carrossel de hambúrgueres */}
       <BurgerCarousel burgers={BURGERS} activeIndex={activeIndex} isMobile={isMobile} />
 
@@ -179,15 +206,18 @@ export function BurgerHero() {
       <OfferBadge burger={activeBurger} />
 
       {/* z-60: bloco inferior esquerdo — marca, descrição, entrega e navegação */}
-      <div className="absolute bottom-5 left-4 z-[60] max-w-[280px] sm:bottom-16 sm:left-8 sm:max-w-[320px] md:left-24">
+      <div
+        className="absolute bottom-5 left-4 z-[60] max-w-[240px] animate-rise-in sm:bottom-16 sm:left-8 sm:max-w-[320px] md:left-24"
+        style={{ animationDelay: '180ms' }}
+      >
         <p
-          className="mb-2 text-base font-extrabold uppercase tracking-wide text-white/95 sm:mb-3 sm:text-[22px]"
+          className="mb-4 text-sm leading-snug text-white/90 sm:hidden"
           style={textShadow}
         >
-          {BRAND_NAME}
+          {BRAND_TAGLINE_SHORT}
         </p>
         <p
-          className="mb-4 hidden text-sm leading-relaxed text-white/85 sm:mb-5 sm:block"
+          className="mb-5 hidden max-w-[280px] text-sm leading-relaxed text-white/85 sm:block"
           style={textShadow}
         >
           {BRAND_TAGLINE}
@@ -210,11 +240,12 @@ export function BurgerHero() {
         href={orderLink}
         target="_blank"
         rel="noopener noreferrer"
-        className={`group absolute bottom-5 right-4 z-[60] flex items-center gap-2 font-display uppercase text-white opacity-95 transition-opacity duration-200 hover:opacity-100 sm:bottom-16 sm:right-8 md:right-10 ${focusRing}`}
+        className={`group absolute bottom-5 right-4 z-[60] flex animate-rise-in items-center gap-2 font-display uppercase text-white opacity-95 transition-opacity duration-200 hover:opacity-100 sm:bottom-16 sm:right-8 md:right-10 ${focusRing}`}
         style={{
           fontSize: 'clamp(20px, 4vw, 56px)',
           lineHeight: 1,
           letterSpacing: '-0.02em',
+          animationDelay: '260ms',
           ...textShadow,
         }}
       >

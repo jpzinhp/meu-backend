@@ -6,20 +6,6 @@
 export function DecorativeElements() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-40 select-none">
-      {/* traço curvo superior direito */}
-      <svg
-        className="absolute right-[6%] top-[8%] h-16 w-16 opacity-40 sm:h-24 sm:w-24"
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <path
-          d="M10 70 C 30 10, 70 10, 90 40"
-          stroke="white"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-      </svg>
-
       {/* asterisco / estrela pequena */}
       <svg
         className="absolute left-[8%] top-[30%] h-6 w-6 animate-float opacity-60 sm:left-[10%] sm:h-9 sm:w-9"

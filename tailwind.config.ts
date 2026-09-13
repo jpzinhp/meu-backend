@@ -42,7 +42,7 @@ const config: Config = {
           'sans-serif',
         ],
         display: ['var(--font-anton)', 'Impact', 'sans-serif'],
-        script: ['"Segoe Script"', '"Brush Script MT"', '"Bradley Hand"', 'cursive'],
+        script: ['var(--font-script)', '"Segoe Script"', 'cursive'],
       },
       boxShadow: {
         soft: '0 1px 2px 0 rgb(15 23 42 / 0.06), 0 1px 3px 0 rgb(15 23 42 / 0.08)',
@@ -57,10 +57,15 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
+        'rise-in': {
+          '0%': { opacity: '0', transform: 'translateY(18px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
         'fade-slide-in': 'fade-slide-in 420ms cubic-bezier(0.4,0,0.2,1)',
         float: 'float 5s ease-in-out infinite',
+        'rise-in': 'rise-in 700ms cubic-bezier(0.16,1,0.3,1) both',
       },
     },
   },

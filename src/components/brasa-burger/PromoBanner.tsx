@@ -1,9 +1,15 @@
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock3, Flame, Truck } from 'lucide-react';
 import { buildWhatsappOrderLink, BURGERS } from '@/lib/brasa-burger/burgers';
 
 const focusRing =
   'focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-burger-focus';
+
+const FEATURES = [
+  { icon: Flame, label: '100% artesanal' },
+  { icon: Clock3, label: 'Pronto em ~20 min' },
+  { icon: Truck, label: 'Entrega na região' },
+];
 
 /**
  * Seção promocional logo abaixo do hero, usando a arte fotográfica real da
@@ -37,6 +43,15 @@ export function PromoBanner() {
             Pedir pelo WhatsApp
             <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
           </a>
+
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6">
+            {FEATURES.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-white/70">
+                <Icon className="h-4 w-4 text-burger-gold" strokeWidth={2.25} aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="order-1 min-w-0 overflow-hidden rounded-3xl shadow-2xl sm:order-2">

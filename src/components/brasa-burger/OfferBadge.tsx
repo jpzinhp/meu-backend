@@ -11,11 +11,12 @@ interface OfferBadgeProps {
 export function OfferBadge({ burger }: OfferBadgeProps) {
   return (
     <div
-      className="absolute right-4 top-16 z-[60] max-w-[150px]
+      className="absolute right-4 top-16 z-[60] max-w-[150px] animate-rise-in
         rounded-xl border-2 border-burger-brown-light/70 bg-burger-brown-dark/90
-        px-3 py-2.5 shadow-lg backdrop-blur-sm
+        px-3 py-2.5 shadow-2xl backdrop-blur-sm
         sm:right-8 sm:top-24 sm:max-w-none
         sm:rounded-3xl sm:px-8 sm:py-6 md:right-10"
+      style={{ animationDelay: '40ms' }}
     >
       <p
         className="hidden font-script text-lg leading-none text-burger-gold sm:block sm:text-2xl"

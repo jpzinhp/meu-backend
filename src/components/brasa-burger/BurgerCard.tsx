@@ -93,6 +93,7 @@ export function BurgerCard({ burger, role, isMobile }: BurgerCardProps) {
         style={{
           WebkitMaskImage: vignetteMask,
           maskImage: vignetteMask,
+          filter: 'saturate(1.1) contrast(1.05)',
         }}
       />
     </div>

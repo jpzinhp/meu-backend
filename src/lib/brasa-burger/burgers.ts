@@ -18,6 +18,12 @@ export const BRAND_NAME = 'BRASA BURGER';
 export const BRAND_TAGLINE =
   'O sabor que chega quente, artesanal e do jeito que você gosta.';
 
+/** Versão compacta da tagline para telas pequenas. */
+export const BRAND_TAGLINE_SHORT = 'Artesanal, quente e na hora certa.';
+
+export const BRAND_KICKER = '100% artesanal';
+export const HERO_HEADLINE = ['Sabor que', 'vem da brasa'];
+
 /** Número usado nos links de pedido via WhatsApp (formato E.164, só dígitos). */
 export const WHATSAPP_NUMBER = '5599999999999';
 export const WHATSAPP_DISPLAY = '(99) 99999-9999';
